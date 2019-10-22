@@ -1,0 +1,20 @@
+### User stories
+
+- the user should be able to see his/her score
+- the user should be able to input the answer for the movie trivia
+- the user should be able to input his/her name in relation to the score
+- there should be a score board with the current round being played.
+- there should be multiple rounds, so starts with 3, 5, and 10 questions. 
+- after all the rounds there should be a winner, but initiate the next round, after all the rounds are played, there should be a final title to the winner and the loser.
+- Without refreshing the page, the game should restart!! and start a new game!
+
+### Game mechanics
+
+- There should be an initial screen onboarding the player about the game and how it should be played. Maybe?????????????????????
+- While onboarding there should be an input field for the players names and keep them for the round
+- The user should see a simple to use and intuitive UI asking for input regarding the question "What is the title of this movie?"
+- The movie psynopsis shows and the current player is required to write down the correct name of the movie, upon completion, the movie poster shows and confetti flies out of the border of the screen (maybe). 
+
+### pseudo code
+
+- Check the omdb api to check how many people have watch the movie in relation to the movie ratings, this can help with the difficulty levels
