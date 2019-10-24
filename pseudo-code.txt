@@ -29,3 +29,5 @@
 
 NAME FOR THE GAME, 
 "MOVIE WARS"
+
+- add players to the board with a score

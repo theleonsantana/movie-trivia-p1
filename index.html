@@ -11,35 +11,29 @@
 		></script>
 		<script src="app.js"></script>
 		<link rel="stylesheet" href="main.css" />
-		<title>Movieneitor Game</title>
+		<title>Movie Wars</title>
 	</head>
 	<body>
-		<div id="modal">
-			<div id="modal-content">
-				<h2>Welcome to Movie Wars!</h2>
-				<p>
-					This is a simple two player game to test your knowledge on film and
-					entertainment.
-				</p>
-				<form>
-					<input type="text" placeholder="Player 1" />
-					<input type="text" placeholder="Player 2" />
-					<button id="start-game" type="submit">
-						Start Game
-					</button>
-				</form>
-			</div>
-		</div>
 		<div id="contianer">
-			<header>
-				<h1>Movie Wars</h1>
-				<div class="players">
-					<div id="player-1"></div>
-					<div id="player-2"></div>
-				</div>
-			</header>
-			<section id="question"></section>
-			<section id="choices"></section>
+			<div id="start-game"></div>
+			<div id="playable-area">
+				<header>
+					<h1>Movie Wars</h1>
+					<div class="players">
+						<div id="player-1">
+							<p id="name-1"></p>
+						</div>
+						<div id="player-2">
+							<p id="name-2"></p>
+						</div>
+					</div>
+				</header>
+				<section id="game-section">
+					<div id="timer"></div>
+					<div id="question"></div>
+					<div id="choices"></div>
+				</section>
+			</div>
 		</div>
 	</body>
 </html>
