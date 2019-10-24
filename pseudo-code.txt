@@ -18,3 +18,14 @@
 ### pseudo code
 
 - Check the omdb api to check how many people have watch the movie in relation to the movie ratings, this can help with the difficulty levels
+- Check for a piece of the name or the entire name ? contains ?
+-- Really check on the name for the movie
+
+-- I ended up using a different api, because omdb doesn't give me random movies and or the bios all the time or a context to a question when I need it, I feel like I can force it to give me what I need but that could take an unknown amout of time. 
+
+- the player is welcome with a prompt to play with another person, so in this case both people have to input their names
+- the name of the players is related to their personal scores, so two different scores for two different people. 
+- there should be categories so easy medium and hard, if you complete all then you are the "movie master" 
+
+NAME FOR THE GAME, 
+"MOVIE WARS"
