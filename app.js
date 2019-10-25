@@ -8,24 +8,33 @@ $(() => {
 	// DOM Variables
 	const $container = $('#contianer');
 	const $startGame = $('#start-game');
+	const $firstPlayer = $('#nameP1').val();
+	const $secodPlayer = $('#nameP2').val();
 
-	// Players
-	const player1 = {
-		name: '',
-		score: 0,
-	};
+	// Players class
+	class Player {
+		constructor(name, score) {
+			this.name = name;
+			this.score = score;
+		}
+	}
 
-	const player2 = {
-		name: '',
-		score: 0,
-	};
+	const player1 = new Player($firstPlayer, 0);
+	const player2 = new Player($secodPlayer, 0);
+
+	// Get player stats / start game
+	$startGame.on('submit', event => {
+		event.preventDefault();
+		$('body').css('background-color', getColor);
+	});
 
 	// Movie trivia API (data)
 	$.ajax({
 		url: `https://opentdb.com/api.php?amount=50&category=11&type=multiple`,
 	}).then(
 		data => {
-			console.log(data);
+			// API data
+			//console.log(data.results);
 		},
 		() => {
 			console.log('Bad request');
@@ -33,5 +42,4 @@ $(() => {
 	);
 
 	// Begin the game
-	$('body').css('background-color', getColor);
 });
