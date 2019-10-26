@@ -5,7 +5,6 @@ $(() => {
 		return `hsl(${360 * Math.random()}, ${25 + 70 * Math.random()}%, ${85 +
 			10 * Math.random()}%)`;
 	};
-
 	// Players class
 	class Player {
 		constructor(name, score) {
@@ -75,21 +74,31 @@ $(() => {
 							.attr('id', 'current-question')
 							.html(randomQuestion.question)
 					);
-
 					// store the correct answer in a variable
 					const correctAnswer = randomQuestion.correct_answer;
 					const incorrectAnswer = randomQuestion.incorrect_answers;
-
 					// array with all the options to the question
 					const choices = [];
 					// get right answer and store it in the array
 					choices.push(correctAnswer);
 					// for loop for the incorrect answers
 					for (let i = 0; i < incorrectAnswer.length; i++) {
-						//const $answers = $('<div>').attr('id', 'answer-' + i);
-						//$answers.html(randomQuestion.incorrect_answers[i]);
-						//$('#choices').append($answers);
+						// add the incorrect answers into the choices array
 						choices.push(incorrectAnswer[i]);
+					}
+					// function to change the order of the choices randomly
+					const shuffleChoices = arr => {
+						for (let i = arr.length - 1; i > 0; i--) {
+							let j = Math.floor(Math.random() * (i + 1));
+							[arr[i], arr[j]] = [arr[j], arr[i]];
+						}
+					};
+					shuffleChoices(choices);
+					// for loop to display all the choices avaliable
+					for (let i = 0; i < choices.length; i++) {
+						const $answers = $('<div>').attr('id', 'answer-' + i);
+						$answers.html(choices[i]);
+						$('#choices').append($answers);
 					}
 					console.log(choices);
 				},
