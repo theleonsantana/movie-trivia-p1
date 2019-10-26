@@ -135,6 +135,7 @@ $(() => {
 						$('#choices')
 							.children()
 							.remove();
+						$('body').css('background-color', getColor);
 						getQuestion();
 					} else {
 						console.log('incorrect');
@@ -143,4 +144,5 @@ $(() => {
 				});
 		};
 	});
+	$('body').css('background-color', getColor);
 });
