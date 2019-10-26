@@ -129,8 +129,16 @@ $(() => {
 				.on('click', event => {
 					if (event.currentTarget.innerHTML === correct) {
 						console.log('correct');
+						$('#question')
+							.children()
+							.remove();
+						$('#choices')
+							.children()
+							.remove();
+						getQuestion();
 					} else {
 						console.log('incorrect');
+						alert('Wrong Answer');
 					}
 				});
 		};
