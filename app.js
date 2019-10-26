@@ -58,7 +58,7 @@ $(() => {
 		};
 		playerStats();
 
-		const assignQuestion = () => {
+		const getQuestion = () => {
 			// Movie trivia API (data)
 			$.ajax({
 				url: `https://opentdb.com/api.php?amount=10&category=11&type=multiple`,
@@ -69,16 +69,35 @@ $(() => {
 					// random question from my api call
 					const randomQuestion =
 						data.results[Math.floor(Math.random() * data.results.length)];
-					//console.log(randomQuestion);
-					$('#question')
-						.append('<p>')
-						.text(randomQuestion.question);
+					console.log(randomQuestion);
+					$('#question').append(
+						$('<p>')
+							.attr('id', 'current-question')
+							.html(randomQuestion.question)
+					);
+
+					// store the correct answer in a variable
+					const correctAnswer = randomQuestion.correct_answer;
+					const incorrectAnswer = randomQuestion.incorrect_answers;
+
+					// array with all the options to the question
+					const choices = [];
+					// get right answer and store it in the array
+					choices.push(correctAnswer);
+					// for loop for the incorrect answers
+					for (let i = 0; i < incorrectAnswer.length; i++) {
+						//const $answers = $('<div>').attr('id', 'answer-' + i);
+						//$answers.html(randomQuestion.incorrect_answers[i]);
+						//$('#choices').append($answers);
+						choices.push(incorrectAnswer[i]);
+					}
+					console.log(choices);
 				},
 				() => {
 					console.log('Bad request');
 				}
 			);
 		};
-		assignQuestion();
+		getQuestion();
 	});
 });
