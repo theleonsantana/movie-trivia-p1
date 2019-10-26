@@ -34,3 +34,8 @@ h1 {
 .players-form input {
 	margin-bottom: 20px;
 }
+
+.players {
+	display: flex;
+	justify-content: space-evenly;
+}

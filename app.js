@@ -5,11 +5,6 @@ $(() => {
 		return `hsl(${360 * Math.random()}, ${25 + 70 * Math.random()}%, ${85 +
 			10 * Math.random()}%)`;
 	};
-	// DOM Variables
-	const $container = $('#container');
-	const $initGame = $('#init-game');
-	const $player1 = $('#player-1');
-	const $player2 = $('#player-2');
 
 	// Players class
 	class Player {
@@ -17,7 +12,7 @@ $(() => {
 			this.name = name;
 			this.score = score;
 			this.correct = 0;
-			this.incorrec = 0;
+			this.incorrect = 0;
 			this.unanswered = 0;
 			this.currentSet = 0;
 			this.timer = 20;
@@ -26,7 +21,7 @@ $(() => {
 	}
 
 	// Get player stats / start game
-	$initGame.on('submit', event => {
+	$('#init-game').on('submit', event => {
 		event.preventDefault();
 		// get players name
 		const $firstPlayer = $('#nameP1').val();
@@ -39,34 +34,51 @@ $(() => {
 
 		// change background color on submit
 		$('body').css('background-color', getColor);
-		$('#start-container').fadeOut(3000, () => {
-			$(this).remove();
+		$('#start-container').fadeOut(400, () => {
+			$('#start-container').remove();
 		});
 
-		const initTrivia = () => {
+		// get player's names and initial scores
+		const playerStats = () => {
+			// first player name
 			$('#player-1')
 				.children('#name')
 				.text(player1.name);
-
+			$('#player-1')
+				.children('#score')
+				.text(player1.score);
+			// second player name
+			$('#player-2')
+				.children('#name')
+				.text(player2.name);
+			$('#player-2')
+				.children('#score')
+				.text(player2.score);
 			// $('#playable-area').
 		};
-		initTrivia();
-	});
+		playerStats();
 
-	// Movie trivia API (data)
-	$.ajax({
-		url: `https://opentdb.com/api.php?amount=20&category=11&type=multiple`,
-	}).then(
-		data => {
-			// API data
-			console.log(data.results);
-			// random question from my api call
-			const randomQuestion =
-				data.results[Math.floor(Math.random() * data.results.length)];
-			console.log(randomQuestion);
-		},
-		() => {
-			console.log('Bad request');
-		}
-	);
+		const assignQuestion = () => {
+			// Movie trivia API (data)
+			$.ajax({
+				url: `https://opentdb.com/api.php?amount=10&category=11&type=multiple`,
+			}).then(
+				data => {
+					// API data
+					console.log(data.results);
+					// random question from my api call
+					const randomQuestion =
+						data.results[Math.floor(Math.random() * data.results.length)];
+					//console.log(randomQuestion);
+					$('#question')
+						.append('<p>')
+						.text(randomQuestion.question);
+				},
+				() => {
+					console.log('Bad request');
+				}
+			);
+		};
+		assignQuestion();
+	});
 });
