@@ -1,5 +1,4 @@
 $(() => {
-	// const randomMovieId = Math.floor(Math.random() * 2155529 + 1);
 	// random background color generator
 	const getColor = () => {
 		return `hsl(${360 * Math.random()}, ${25 + 70 * Math.random()}%, ${85 +
@@ -29,7 +28,7 @@ $(() => {
 		// assign name to the players
 		const player1 = new Player($firstPlayer, 0);
 		const player2 = new Player($secodPlayer, 0);
-		console.log(player1, player2);
+		//console.log(player1, player2);
 
 		// change background color on submit
 		$('body').css('background-color', getColor);
@@ -57,50 +56,23 @@ $(() => {
 		};
 		playerStats();
 
+		// Movie trivia API (data)
+		// get question
+
 		const getQuestion = () => {
-			// Movie trivia API (data)
 			$.ajax({
-				url: `https://opentdb.com/api.php?amount=10&category=11&type=multiple`,
+				url: `https://opentdb.com/api.php?amount=1&category=11&type=multiple`,
 			}).then(
 				data => {
 					// API data
-					console.log(data.results);
-					// random question from my api call
-					const randomQuestion =
-						data.results[Math.floor(Math.random() * data.results.length)];
-					console.log(randomQuestion);
-					$('#question').append(
-						$('<p>')
-							.attr('id', 'current-question')
-							.html(randomQuestion.question)
-					);
-					// store the correct answer in a variable
-					const correctAnswer = randomQuestion.correct_answer;
-					const incorrectAnswer = randomQuestion.incorrect_answers;
-					// array with all the options to the question
-					const choices = [];
-					// get right answer and store it in the array
-					choices.push(correctAnswer);
-					// for loop for the incorrect answers
-					for (let i = 0; i < incorrectAnswer.length; i++) {
-						// add the incorrect answers into the choices array
-						choices.push(incorrectAnswer[i]);
-					}
-					// function to change the order of the choices randomly
-					const shuffleChoices = arr => {
-						for (let i = arr.length - 1; i > 0; i--) {
-							let j = Math.floor(Math.random() * (i + 1));
-							[arr[i], arr[j]] = [arr[j], arr[i]];
-						}
-					};
-					shuffleChoices(choices);
-					// for loop to display all the choices avaliable
-					for (let i = 0; i < choices.length; i++) {
-						const $answers = $('<div>').attr('id', 'answer-' + i);
-						$answers.html(choices[i]);
-						$('#choices').append($answers);
-					}
-					console.log(choices);
+					// API variables
+					const dataQuestion = data.results[0].question;
+					// stored the correct answer in a variable
+					const correctAnswer = data.results[0].correct_answer;
+					// stored the incorrect answer in a variable
+					const incorrectAnswers = data.results[0].incorrect_answers;
+					// callback functions to handle data outside the API call
+					createQuestion(dataQuestion);
 				},
 				() => {
 					console.log('Bad request');
@@ -108,5 +80,54 @@ $(() => {
 			);
 		};
 		getQuestion();
+
+		const createQuestion = question => {
+			$('#question').append(
+				$('<p>')
+					.attr('id', 'current-question')
+					.html(question)
+			);
+		};
+
+		// options for the answers
+		const options = [];
+		// function to generate the options for the question
+		const createOptions = (correct, incorrect) => {
+			// get right answer and store it in the array
+			options.push(correct);
+			// for loop for the incorrect answers
+			for (let i = 0; i < incorrect.length; i++) {
+				// add the incorrect answers into the choices array
+				options.push(incorrect[i]);
+			}
+		};
+
+		// function to change the order of the options randomly
+		const shuffleChoices = arr => {
+			for (let i = arr.length - 1; i > 0; i--) {
+				let j = Math.floor(Math.random() * (i + 1));
+				[arr[i], arr[j]] = [arr[j], arr[i]];
+			}
+		};
+		// shuffleChoices(choices);
+		// // for loop to display all the choices avaliable
+		// for (let i = 0; i < choices.length; i++) {
+		// 	const $answers = $('<div>').attr('id', 'option-' + i);
+		// 	$answers.html(choices[i]);
+		// 	$('#choices').append($answers);
+		// }
+		// console.log(choices);
+
+		// // checking if there answer is the correct on click
+		// $('#choices')
+		// 	.children('div')
+		// 	.on('click', event => {
+		// 		if (event.currentTarget.innerHTML === correctAnswer) {
+		// 			console.log('correct');
+		// 			getQuestion();
+		// 		} else {
+		// 			console.log('incorrect');
+		// 		}
+		// 	});
 	});
 });
