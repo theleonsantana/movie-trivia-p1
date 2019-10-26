@@ -73,6 +73,7 @@ $(() => {
 					const incorrectAnswers = data.results[0].incorrect_answers;
 					// callback functions to handle data outside the API call
 					createQuestion(dataQuestion);
+					createOptions(correctAnswer, incorrectAnswers);
 				},
 				() => {
 					console.log('Bad request');
@@ -89,10 +90,10 @@ $(() => {
 			);
 		};
 
-		// options for the answers
-		const options = [];
 		// function to generate the options for the question
 		const createOptions = (correct, incorrect) => {
+			// options for the answers
+			let options = [];
 			// get right answer and store it in the array
 			options.push(correct);
 			// for loop for the incorrect answers
@@ -100,23 +101,25 @@ $(() => {
 				// add the incorrect answers into the choices array
 				options.push(incorrect[i]);
 			}
-		};
+			// function to change the order of the options randomly
+			const shuffleChoices = arr => {
+				for (let i = arr.length - 1; i > 0; i--) {
+					let j = Math.floor(Math.random() * (i + 1));
+					[arr[i], arr[j]] = [arr[j], arr[i]];
+				}
+				return arr;
+			};
 
-		// function to change the order of the options randomly
-		const shuffleChoices = arr => {
-			for (let i = arr.length - 1; i > 0; i--) {
-				let j = Math.floor(Math.random() * (i + 1));
-				[arr[i], arr[j]] = [arr[j], arr[i]];
+			options = shuffleChoices(options);
+
+			for (let i = 0; i < options.length; i++) {
+				$('#choices').append(
+					$('<div>')
+						.attr('id', 'option' + i)
+						.html(options[i])
+				);
 			}
 		};
-		// shuffleChoices(choices);
-		// // for loop to display all the choices avaliable
-		// for (let i = 0; i < choices.length; i++) {
-		// 	const $answers = $('<div>').attr('id', 'option-' + i);
-		// 	$answers.html(choices[i]);
-		// 	$('#choices').append($answers);
-		// }
-		// console.log(choices);
 
 		// // checking if there answer is the correct on click
 		// $('#choices')
