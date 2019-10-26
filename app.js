@@ -74,6 +74,7 @@ $(() => {
 					// callback functions to handle data outside the API call
 					createQuestion(dataQuestion);
 					createOptions(correctAnswer, incorrectAnswers);
+					checkAnswer(correctAnswer);
 				},
 				() => {
 					console.log('Bad request');
@@ -121,16 +122,17 @@ $(() => {
 			}
 		};
 
-		// // checking if there answer is the correct on click
-		// $('#choices')
-		// 	.children('div')
-		// 	.on('click', event => {
-		// 		if (event.currentTarget.innerHTML === correctAnswer) {
-		// 			console.log('correct');
-		// 			getQuestion();
-		// 		} else {
-		// 			console.log('incorrect');
-		// 		}
-		// 	});
+		const checkAnswer = correct => {
+			// checking if there answer is the correct on click
+			$('#choices')
+				.children('div')
+				.on('click', event => {
+					if (event.currentTarget.innerHTML === correct) {
+						console.log('correct');
+					} else {
+						console.log('incorrect');
+					}
+				});
+		};
 	});
 });
