@@ -8,8 +8,6 @@ $(() => {
 	// DOM Variables
 	const $container = $('#container');
 	const $initGame = $('#init-game');
-	const $firstPlayer = $('#nameP1').val();
-	const $secodPlayer = $('#nameP2').val();
 	const $player1 = $('#player-1');
 	const $player2 = $('#player-2');
 
@@ -27,13 +25,32 @@ $(() => {
 		}
 	}
 
-	const player1 = new Player($firstPlayer, 0);
-	const player2 = new Player($secodPlayer, 0);
-
 	// Get player stats / start game
 	$initGame.on('submit', event => {
 		event.preventDefault();
+		// get players name
+		const $firstPlayer = $('#nameP1').val();
+		const $secodPlayer = $('#nameP2').val();
+
+		// assign name to the players
+		const player1 = new Player($firstPlayer, 0);
+		const player2 = new Player($secodPlayer, 0);
+		console.log(player1, player2);
+
+		// change background color on submit
 		$('body').css('background-color', getColor);
+		$('#start-container').fadeOut(3000, () => {
+			$(this).remove();
+		});
+
+		const initTrivia = () => {
+			$('#player-1')
+				.children('#name')
+				.text(player1.name);
+
+			// $('#playable-area').
+		};
+		initTrivia();
 	});
 
 	// Movie trivia API (data)
@@ -43,6 +60,7 @@ $(() => {
 		data => {
 			// API data
 			console.log(data.results);
+			// random question from my api call
 			const randomQuestion =
 				data.results[Math.floor(Math.random() * data.results.length)];
 			console.log(randomQuestion);
@@ -51,6 +69,4 @@ $(() => {
 			console.log('Bad request');
 		}
 	);
-
-	// Begin the game
 });
