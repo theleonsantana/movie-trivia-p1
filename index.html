@@ -14,20 +14,20 @@
 		<title>Movie Wars</title>
 	</head>
 	<body>
-		<div id="contianer">
+		<div id="container" class="container">
 			<h1>Movie Wars</h1>
-			<div id="start-game">
+			<div id="start-container">
 				<h2>Welcome to Movie Wars!</h2>
 				<h3>Rules</h3>
-				<ul>
+				<ul class="list-rules">
 					<li>Two players are required</li>
 					<li>You have 20 seconds to anwser</li>
 					<li>The player with a higher score wins!</li>
 				</ul>
-				<form>
+				<form id="init-game" class="players-form">
 					<input id="nameP1" type="text" placeholder="Player 1" required />
 					<input id="nameP2" type="text" placeholder="Player 2" required />
-					<button id="start-game" type="submit">
+					<button type="submit" id="start-game">
 						Start Game
 					</button>
 				</form>
@@ -36,10 +36,12 @@
 				<header>
 					<div class="players">
 						<div id="player-1">
-							<p id="name-1"></p>
+							<div id="name"></div>
+							<div id="score"></div>
 						</div>
 						<div id="player-2">
-							<p id="name-2"></p>
+							<div id="name"></div>
+							<div id="score"></div>
 						</div>
 					</div>
 				</header>

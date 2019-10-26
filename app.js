@@ -6,16 +6,24 @@ $(() => {
 			10 * Math.random()}%)`;
 	};
 	// DOM Variables
-	const $container = $('#contianer');
-	const $startGame = $('#start-game');
+	const $container = $('#container');
+	const $initGame = $('#init-game');
 	const $firstPlayer = $('#nameP1').val();
 	const $secodPlayer = $('#nameP2').val();
+	const $player1 = $('#player-1');
+	const $player2 = $('#player-2');
 
 	// Players class
 	class Player {
 		constructor(name, score) {
 			this.name = name;
 			this.score = score;
+			this.correct = 0;
+			this.incorrec = 0;
+			this.unanswered = 0;
+			this.currentSet = 0;
+			this.timer = 20;
+			this.timerOn = false;
 		}
 	}
 
@@ -23,18 +31,21 @@ $(() => {
 	const player2 = new Player($secodPlayer, 0);
 
 	// Get player stats / start game
-	$startGame.on('submit', event => {
+	$initGame.on('submit', event => {
 		event.preventDefault();
 		$('body').css('background-color', getColor);
 	});
 
 	// Movie trivia API (data)
 	$.ajax({
-		url: `https://opentdb.com/api.php?amount=50&category=11&type=multiple`,
+		url: `https://opentdb.com/api.php?amount=20&category=11&type=multiple`,
 	}).then(
 		data => {
 			// API data
-			//console.log(data.results);
+			console.log(data.results);
+			const randomQuestion =
+				data.results[Math.floor(Math.random() * data.results.length)];
+			console.log(randomQuestion);
 		},
 		() => {
 			console.log('Bad request');
