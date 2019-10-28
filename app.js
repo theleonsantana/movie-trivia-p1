@@ -6,13 +6,14 @@ $(() => {
 	};
 	// Players class
 	class Player {
-		constructor(name, score) {
+		constructor(name, score, turn) {
 			this.name = name;
 			this.score = score;
 			this.correct = 0;
 			this.incorrect = 0;
 			this.unanswered = 0;
 			this.currentSet = 0;
+			this.turn = turn;
 			this.timer = 20;
 			this.timerOn = false;
 		}
@@ -26,10 +27,13 @@ $(() => {
 		const $secodPlayer = $('#nameP2').val();
 
 		// assign name to the players
-		const player1 = new Player($firstPlayer, 0);
-		const player2 = new Player($secodPlayer, 0);
+		const player1 = new Player($firstPlayer, 0, 0);
+		const player2 = new Player($secodPlayer, 0, 1);
 		//console.log(player1, player2);
 
+		const players = { a: player1, b: player2 };
+
+		console.log(players);
 		// change background color on submit
 		$('body').css('background-color', getColor);
 		$('#start-container').fadeOut(400, () => {
@@ -75,6 +79,8 @@ $(() => {
 					createQuestion(dataQuestion);
 					createOptions(correctAnswer, incorrectAnswers);
 					checkAnswer(correctAnswer);
+					changeTurn();
+					console.log(data.results);
 				},
 				() => {
 					console.log('Bad request');
@@ -83,12 +89,27 @@ $(() => {
 		};
 		getQuestion();
 
+		let rounds = 0;
+
+		const changeTurn = () => {
+			if (rounds === 10) {
+				console.log('game ended');
+			} else if (rounds % 2 === 0) {
+				console.log(player1);
+				console.log(rounds);
+			} else {
+				console.log(player2);
+				console.log(rounds);
+			}
+		};
+
 		const createQuestion = question => {
 			$('#question').append(
 				$('<p>')
 					.attr('id', 'current-question')
 					.html(question)
 			);
+			return rounds++;
 		};
 
 		// function to generate the options for the question
