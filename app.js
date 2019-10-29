@@ -6,15 +6,13 @@ $(() => {
 	};
 	// Players class
 	class Player {
-		constructor(name, score, turn) {
+		constructor(name, score) {
 			this.name = name;
 			this.score = score;
 			this.correct = 0;
 			this.incorrect = 0;
 			this.unanswered = 0;
 			this.currentSet = 0;
-			this.turn = turn;
-			this.timer = 20;
 			this.timerOn = false;
 		}
 	}
@@ -27,8 +25,8 @@ $(() => {
 		const $secodPlayer = $('#nameP2').val();
 
 		// assign name to the players
-		const player1 = new Player($firstPlayer, 0, 0);
-		const player2 = new Player($secodPlayer, 0, 1);
+		const player1 = new Player($firstPlayer, 0);
+		const player2 = new Player($secodPlayer, 0);
 		//console.log(player1, player2);
 
 		const players = { a: player1, b: player2 };
@@ -75,11 +73,12 @@ $(() => {
 					const correctAnswer = data.results[0].correct_answer;
 					// stored the incorrect answer in a variable
 					const incorrectAnswers = data.results[0].incorrect_answers;
+					// invoking function to take on switch turns between players
+					changeTurn();
 					// callback functions to handle data outside the API call
 					createQuestion(dataQuestion);
 					createOptions(correctAnswer, incorrectAnswers);
 					checkAnswer(correctAnswer);
-					changeTurn();
 					console.log(data.results);
 				},
 				() => {
@@ -102,6 +101,19 @@ $(() => {
 				console.log(rounds);
 			}
 		};
+
+		// Timer
+		let timeleft = 20;
+		const roundTimer = setInterval(() => {
+			$('#timer').text(timeleft) - timeleft;
+			timeleft -= 1;
+			if (timeleft == 0) {
+				clearInterval(roundTimer);
+
+				$('#timer').text(`Time's up!`);
+			}
+		}, 1000);
+		roundTimer;
 
 		const createQuestion = question => {
 			$('#question').append(
