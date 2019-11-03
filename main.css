@@ -6,19 +6,35 @@
 	--sub-text-color: #40343f;
 	--modal-bg-color: #bfbdba;
 	--btn-bg-color: #8c8888;
+	--answer-right: #58bf49;
+	--answer-wrong: #f21326;
 }
 
-h1 {
+* {
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+li {
 	font-family: 'Roboto Slab', sans-serif;
 }
 
 .container {
-	width: 90%;
-	margin: 0 auto;
+	/* width: 350px; */
+	/* margin: 0 auto; */
 	text-align: center;
+	margin-top: 50px;
+}
+
+.starting-container {
+	/* background-color: var(--main-bg-color); */
+	padding: 2em 1em;
 }
 
 .list-rules {
+	text-align: center;
 	list-style-type: none;
 	padding-inline-start: 0;
 }

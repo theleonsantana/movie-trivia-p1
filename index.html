@@ -10,41 +10,60 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="app.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+
 		<link rel="stylesheet" href="main.css" />
 		<title>Movie Wars</title>
 	</head>
 	<body>
 		<div id="container" class="container">
 			<h1>Movie Wars</h1>
-			<div id="start-container">
+			<div id="start-container" class="starting-container">
 				<h2>Welcome to Movie Wars!</h2>
 				<h3>Rules</h3>
 				<ul class="list-rules">
 					<li>Two players are required</li>
 					<li>You have 20 seconds to anwser</li>
-					<li>The player with a higher score wins!</li>
+					<li>The player with the higher score wins!</li>
 				</ul>
 				<form id="init-game" class="players-form">
-					<input id="nameP1" type="text" placeholder="Player 1" required />
-					<input id="nameP2" type="text" placeholder="Player 2" required />
-					<button type="submit" id="start-game">
+					<input
+						id="nameP1"
+						class="form-control form-control-lg"
+						type="text"
+						placeholder="Player 1"
+						required
+					/>
+					<input
+						id="nameP2"
+						class="form-control form-control-lg"
+						type="text"
+						placeholder="Player 2"
+						required
+					/>
+					<button type="submit" id="start-game" class="btn btn-dark btn-lg">
 						Start Game
 					</button>
 				</form>
 			</div>
-			<div id="playable-area">
+			<div id="playable-area" class="container">
 				<div class="players">
 					<div id="player-1">
 						<h4 id="name"></h4>
-						<h5 id="score"></h5>
+						<h5 id="score" class="h4"></h5>
 					</div>
 					<div id="player-2">
 						<h4 id="name"></h4>
-						<h5 id="score"></h5>
+						<h5 id="score" class="h4"></h5>
 					</div>
 				</div>
 				<section id="game-section">
-					<div id="timer"></div>
+					<div id="timer" class="display-4"></div>
 					<div id="question"></div>
 					<div id="choices"></div>
 				</section>
