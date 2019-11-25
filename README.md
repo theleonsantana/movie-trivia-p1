@@ -1,5 +1,7 @@
-# Movie Wars
+# Main README file for GA Projects
 
-Simple trivia game to test your knowledge on movies and film.
+- **Front-end application**
+  **Project #1:** Movie Wars
 
-There are 10 random question 5 per each player, the player who answers the most questions wins!
+- **Restful application**
+  **Project #2:** Code Challeges Library
