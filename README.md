@@ -4,4 +4,4 @@
   **Project #1:** Movie Wars
 
 - **Restful application**
-  **Project #2:** Code Challeges Library
+  **Project #2:** Code challenges Library
