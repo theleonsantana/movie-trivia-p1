@@ -1,7 +1,11 @@
+// Declare all my game Variables, maybe improve the player class,
+// on submit the player class is created, and stored in a variable
+
 // random background color generator
 const getColor = () => {
-	return `hsl(${360 * Math.random()}, ${25 + 70 * Math.random()}%, ${85 +
-		10 * Math.random()}%)`;
+	return `hsl(${360 * Math.random()}, ${25 + 70 * Math.random()}%, ${
+		85 + 10 * Math.random()
+	}%)`;
 };
 // Players class
 class Player {
@@ -15,28 +19,16 @@ const player1 = new Player(name, 0);
 const player2 = new Player(name, 0);
 // function to clear the board each round
 const clearQuestion = () => {
-	$('#question')
-		.children()
-		.remove();
-	$('#choices')
-		.children()
-		.remove();
+	$('#question').children().remove();
+	$('#choices').children().remove();
 };
 // get player's names and initial scores
 const playerStats = () => {
-	$('#player-1')
-		.children('#name')
-		.text(player1.name);
-	$('#player-1')
-		.children('#score')
-		.text(player1.score);
+	$('#player-1').children('#name').text(player1.name);
+	$('#player-1').children('#score').text(player1.score);
 	// second player name
-	$('#player-2')
-		.children('#name')
-		.text(player2.name);
-	$('#player-2')
-		.children('#score')
-		.text(player2.score);
+	$('#player-2').children('#name').text(player2.name);
+	$('#player-2').children('#score').text(player2.score);
 };
 // Timer
 let timeleft = 20;
@@ -57,11 +49,11 @@ const roundTimer = () => {
 // rounds variable
 let rounds = 0;
 // function assigns turn to each player
-const checkAnswer = correct => {
+const checkAnswer = (correct) => {
 	// checking if there answer is the correct on click
 	$('#choices')
 		.children('div')
-		.on('click', event => {
+		.on('click', (event) => {
 			$('body').css('background-color', getColor);
 			if (rounds === 10) {
 				$('#timer').remove();
@@ -96,7 +88,7 @@ const getQuestion = () => {
 	$.ajax({
 		url: `https://opentdb.com/api.php?amount=1&category=11&type=multiple`,
 	}).then(
-		data => {
+		(data) => {
 			// API data
 			// API variables
 			const dataQuestion = data.results[0].question;
@@ -118,12 +110,8 @@ const getQuestion = () => {
 	);
 };
 // create question in the games
-const createQuestion = question => {
-	$('#question').append(
-		$('<p>')
-			.attr('id', 'current-question')
-			.html(question)
-	);
+const createQuestion = (question) => {
+	$('#question').append($('<p>').attr('id', 'current-question').html(question));
 };
 
 // function to generate the options for the question
@@ -138,7 +126,7 @@ const createOptions = (correct, incorrect) => {
 		options.push(incorrect[i]);
 	}
 	// function to change the order of the options randomly
-	const shuffleChoices = arr => {
+	const shuffleChoices = (arr) => {
 		for (let i = arr.length - 1; i > 0; i--) {
 			let j = Math.floor(Math.random() * (i + 1));
 			[arr[i], arr[j]] = [arr[j], arr[i]];
@@ -155,10 +143,11 @@ const createOptions = (correct, incorrect) => {
 		);
 	}
 };
+
 // On load function
 $(() => {
 	// Get player stats / start game
-	$('#init-game').on('submit', event => {
+	$('#init-game').on('submit', (event) => {
 		// get players name
 		let $firstPlayer = $('#nameP1').val();
 		let $secodPlayer = $('#nameP2').val();
